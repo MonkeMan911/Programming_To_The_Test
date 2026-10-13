@@ -8,10 +8,7 @@ public class CS_Simple_Movement : MonoBehaviour
     [SerializeField] float jumpHeight;
     [SerializeField] bool canMove;
     [SerializeField] bool canJump;
-    [SerializeField] LayerMask layerMask;
-    [SerializeField] float rayLength;
-    [SerializeField] Vector3 offset;
-    RaycastHit hitInfo;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -35,12 +32,6 @@ public class CS_Simple_Movement : MonoBehaviour
         if (canJump) 
         {
             rb.AddForce(Vector3.up * jumpHeight);
-        }
-        //RayCasting
-        Ray ray = new Ray(this.transform.position + offset, transform.TransformDirection(Vector3.forward));
-        if (Physics.Raycast(ray, out hitInfo, rayLength, layerMask)) 
-        {
-            Debug.DrawRay(this.transform.position + offset, transform.TransformDirection(Vector3.forward) * hitInfo.distance, Color.green);
         }
     }
 }
