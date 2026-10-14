@@ -373,7 +373,7 @@ Transform:
   m_GameObject: {fileID: 113237362}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: -3.6}
+  m_LocalPosition: {x: -2.29, y: 0.5, z: -3.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -851,9 +851,10 @@ MonoBehaviour:
   endPoint: {fileID: 1172306091}
   outlineMaterials:
   - {fileID: 2100000, guid: d50f3f5a3a4b3784694c8e68dfa3abd7, type: 2}
-  - {fileID: 2100000, guid: 6c8a5a4814a4a42458a63505e1432bb4, type: 2}
+  - {fileID: 2100000, guid: 7ad204d34bf39f44c94a2badfec9deae, type: 2}
   regularMat: {fileID: 2100000, guid: d50f3f5a3a4b3784694c8e68dfa3abd7, type: 2}
   outlinedEnemies: []
+  canTp: 0
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
