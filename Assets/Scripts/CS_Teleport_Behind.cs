@@ -12,18 +12,20 @@ public class CS_Teleport_Behind : MonoBehaviour
     [SerializeField] float rayLength; // Length for RayCast Ray
     [SerializeField] float capsuleRadius; // Radius for Capsule Overlap
     [SerializeField] Vector3 offset; // offset for RayCast Ray
+    [SerializeField] Vector3 tpOffset; // offset for RayCast Ray
     [SerializeField] Transform startPoint; // Start Position for Capsule Overlap
     [SerializeField] Transform endPoint; //End Position for Capsule Overlap
     [SerializeField] Material[] outlineMaterials; //Set of Materials for outlining Enemies
     [SerializeField] Material regularMat; //Just the base material set in the Inspector
     public List<MeshRenderer> outlinedEnemies = new(); //List of MeshRenderers That creates an empty list for the renderers
-    public bool canTp = false; //Bool to only allow the TeleportCheck() function to be run once
+    public bool highlighted = false; //Bool to only allow the TeleportCheck() function to be run once
     RaycastHit hitInfo; //Tells Unity what the RayCast is Hitting
+    [SerializeField] bool tpAble;
+    [SerializeField] Transform player;
 
     private void Start()
     {
-        canTp = false; //Sets the bool to false
-        
+        highlighted = false; //Sets the bool to false
     }
     void Update()
     {
@@ -31,10 +33,14 @@ public class CS_Teleport_Behind : MonoBehaviour
         if (Physics.Raycast(ray, out hitInfo, rayLength, tpLayer)) //if RayCast Hits the desired Layer then execute Below
         {
             Debug.DrawRay(this.transform.position + offset, transform.TransformDirection(Vector3.forward) * hitInfo.distance, Color.green); //Shows Raycast as green in the scene
-            if (!canTp) //if canTp is false then Execute
+            if (!highlighted) //if canTp is false then Execute
             {
-                TeleportCheck(); //Runs The Teleport Check Function if the RayCast Hits Enemy Layer and canTp == False
-                canTp = true; //sets to true so it cannot be executed again
+                HighlightEnemy(); //Runs The Teleport Check Function if the RayCast Hits Enemy Layer and canTp == False
+                highlighted = true; //sets to true so it cannot be executed again
+            }
+            if (tpAble && Input.GetKeyDown(KeyCode.E))
+            {
+                TeleportBehindEnemy();
             }
         }
         else //if the raycast doesnt hit the desired layer
@@ -45,8 +51,9 @@ public class CS_Teleport_Behind : MonoBehaviour
         
     }
 
-    public void TeleportCheck() //public void can be accessed by multiple scripts
+    public void HighlightEnemy() //public void can be accessed by multiple scripts
     {
+        tpAble = true;
         Collider[] enemyColliders = Physics.OverlapCapsule(startPoint.position, endPoint.position, capsuleRadius, tpLayer); //defines multiple colliders inside a Capsule Overplap that determines whether they are inside/overlapping with the capsule or not
         foreach (Collider collider in enemyColliders) //foreach Collider inside the Overlapp
         {
@@ -60,7 +67,8 @@ public class CS_Teleport_Behind : MonoBehaviour
     }
     void UnHighlight() //private void can only be accessed by this script
     {
-        canTp = false; //sets the canTp bool back to false so an enemy can be highlighted again once the original highlight has been removed
+        highlighted = false; //sets the canTp bool back to false so an enemy can be highlighted again once the original highlight has been removed
+        tpAble = false;
         foreach (MeshRenderer rend in outlinedEnemies) //foreach Meshrenderer that is defined inside the new list
         {
             if (rend != null) //if the renderer is not null
@@ -74,6 +82,21 @@ public class CS_Teleport_Behind : MonoBehaviour
             }
         }
         outlinedEnemies.Clear(); //clears the list once the capsule no longer overlaps
+    }
+
+    public void TeleportBehindEnemy() 
+    {
+        Collider[] backCollider = Physics.OverlapCapsule(startPoint.position, endPoint.position, capsuleRadius);
+        foreach (Collider col in backCollider)
+        {
+            CS_Allow_Teleport allow_Teleport = col.GetComponentInChildren<CS_Allow_Teleport>();
+            if (allow_Teleport != null)
+            {
+                Debug.Log("Behind You");
+                player.transform.position = col.transform.position + tpOffset;
+                player.transform.rotation = col.transform.rotation;
+            }
+        }
     }
     void OnDrawGizmos()
     {
