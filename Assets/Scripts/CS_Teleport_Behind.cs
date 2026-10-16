@@ -1,10 +1,5 @@
 using System.Collections.Generic;
-using System.Linq;
-using Unity.Android.Gradle;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.UI;
 
 public class CS_Teleport_Behind : MonoBehaviour
 {
