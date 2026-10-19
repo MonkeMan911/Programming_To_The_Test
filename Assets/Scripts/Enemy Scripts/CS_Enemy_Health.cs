@@ -3,6 +3,7 @@ using UnityEngine;
 public class CS_Enemy_Health : MonoBehaviour, IDamageable
 {
     public int health {get; set;}
+    public CS_Player_Deal_Damage damage;
 
     private void Start()
     {
@@ -12,7 +13,7 @@ public class CS_Enemy_Health : MonoBehaviour, IDamageable
     {
         health -= hpAmount;
         Debug.Log("Damage" + hpAmount);
-        if (health <= 0) 
+        if (health <= 0 && damage.timeFrozen == false) 
         {
             Death();
         }
