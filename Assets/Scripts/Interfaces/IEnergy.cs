@@ -6,7 +6,8 @@ public class Energy : MonoBehaviour
     private int maxEnergy = 5;
     [SerializeField] private int currentEnergy;
     public bool outOfEnergy;
-    private float cdTime;
+    [SerializeField] private float cdTime = 1;
+    private bool regenEnergy;
 
     private void Start()
     {
@@ -26,6 +27,11 @@ public class Energy : MonoBehaviour
         if (currentEnergy <= 0) 
         {
             outOfEnergy = true;
+        }
+        if (currentEnergy > maxEnergy) 
+        {
+            currentEnergy = maxEnergy;
+            outOfEnergy = false;
         }
         if (outOfEnergy) 
         {
@@ -48,12 +54,12 @@ public class Energy : MonoBehaviour
             Debug.Log("You're out of luck Pal");
             return;
         }
-        
+
     }
 
     IEnumerator SlowRegen() 
     {
         yield return new WaitForSeconds(cdTime);
-        currentEnergy += 1;
+        currentEnergy++;
     }
 }
