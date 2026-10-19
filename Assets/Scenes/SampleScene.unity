@@ -272,6 +272,7 @@ GameObject:
   - component: {fileID: 113237364}
   - component: {fileID: 113237369}
   - component: {fileID: 113237363}
+  - component: {fileID: 113237370}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -437,6 +438,20 @@ MonoBehaviour:
   damageAmount: 25
   damageStacks: 0
   timeFrozen: 1
+--- !u!114 &113237370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113237362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70c4a0ef684fb8a4891596261c586e2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentEnergy: 0
+  outOfEnergy: 0
 --- !u!1 &255009703
 GameObject:
   m_ObjectHideFlags: 0

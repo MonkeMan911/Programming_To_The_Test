@@ -1,10 +1,12 @@
 using UnityEngine;
+using System.Collections;
 
 public class Energy : MonoBehaviour 
 {
-    private int maxEnergy;
-    private int currentEnergy;
+    private int maxEnergy = 5;
+    [SerializeField] private int currentEnergy;
     public bool outOfEnergy;
+    private float cdTime;
 
     private void Start()
     {
@@ -12,17 +14,46 @@ public class Energy : MonoBehaviour
     }
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Alpha1)) 
+        {
+            EnergyConsumption(1);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2)) 
+        {
+            EnergyConsumption(2);
+        }
+
         if (currentEnergy <= 0) 
         {
             outOfEnergy = true;
         }
+        if (outOfEnergy) 
+        {
+            StartCoroutine(SlowRegen());
+        }
+        if (!outOfEnergy) 
+        {
+            StopCoroutine(SlowRegen());
+        }
     }
 
-    void EnergyConsumption(int amount) 
+    public void EnergyConsumption(int amount) 
     {
         if (!outOfEnergy) 
         {
             currentEnergy -= amount;
         }
+        if (outOfEnergy) 
+        {
+            Debug.Log("You're out of luck Pal");
+            return;
+        }
+        
+    }
+
+    IEnumerator SlowRegen() 
+    {
+        yield return new WaitForSeconds(cdTime);
+        currentEnergy += 1;
     }
 }
