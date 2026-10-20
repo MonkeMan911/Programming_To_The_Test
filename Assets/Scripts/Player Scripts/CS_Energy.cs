@@ -1,20 +1,25 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Energy : MonoBehaviour 
 {
+    [SerializeField] Slider energySlider;
     private int maxEnergy = 5;
     [SerializeField] private int currentEnergy;
     public bool outOfEnergy;
     [SerializeField] private float cdTime = 1;
-    private bool regenEnergy;
+    public bool regenEnergy;
 
     private void Start()
     {
         currentEnergy = maxEnergy;
+        energySlider.value = currentEnergy;
     }
     private void Update()
     {
+        energySlider.value = currentEnergy;
+
         if (Input.GetKeyDown(KeyCode.Alpha1)) 
         {
             EnergyConsumption(1);
@@ -35,11 +40,12 @@ public class Energy : MonoBehaviour
         }
         if (outOfEnergy) 
         {
-            StartCoroutine(SlowRegen());
+            AddEnergy();
         }
         if (!outOfEnergy) 
         {
-            StopCoroutine(SlowRegen());
+            regenEnergy = false;
+            StopAllCoroutines();
         }
     }
 
@@ -56,10 +62,23 @@ public class Energy : MonoBehaviour
         }
 
     }
+    public void AddEnergy() 
+    {
+        if (!regenEnergy) 
+        {
+            StartCoroutine(SlowRegen());
+        }
+    }
 
     IEnumerator SlowRegen() 
     {
-        yield return new WaitForSeconds(cdTime);
-        currentEnergy++;
+        regenEnergy = true;
+        int targetEnergy = currentEnergy + 5;
+        while (currentEnergy < targetEnergy) 
+        {
+            currentEnergy++;
+            yield return new WaitForSeconds(cdTime);
+        }
+        regenEnergy = false;
     }
 }
