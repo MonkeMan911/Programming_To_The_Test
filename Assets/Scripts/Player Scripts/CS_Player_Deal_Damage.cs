@@ -43,6 +43,7 @@ public class CS_Player_Deal_Damage : MonoBehaviour
 
     IEnumerator DamageStackApply() 
     {
+        yield return new WaitForSeconds(2);
         Attack();
         yield return new WaitForSeconds(1);
         damageStacks = 1;
