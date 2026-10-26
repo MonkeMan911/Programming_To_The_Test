@@ -2,25 +2,20 @@ using UnityEngine;
 
 public class CS_Projectile : MonoBehaviour
 {
-    float projectileSpeed;
+    float projectileSpeed = 2;
     Rigidbody rb;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] Transform ePosition;
+    [SerializeField] Vector3 offset;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        transform.rotation = ePosition.rotation;
+        transform.position = ePosition.position + Vector3.forward;
     }
 
-    // Update is called once per frame
     void Update()
     {
         rb.AddForce(Vector3.forward * projectileSpeed);
-        float cTime = 0;
-        float tTime = 5;
-        cTime += Time.deltaTime;
-        if (cTime >= tTime) 
-        {
-            Destroy(gameObject);
-        }
     }
     private void OnCollisionEnter(Collision collision)
     {

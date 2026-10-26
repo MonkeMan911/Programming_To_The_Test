@@ -14,7 +14,7 @@ public class CS_Simple_Movement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         //Movement

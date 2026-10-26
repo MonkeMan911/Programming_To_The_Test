@@ -4,16 +4,22 @@ using UnityEngine.UIElements;
 
 public class CS_Enemy_Move : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] CS_Player_Deal_Damage player_Damage;
     void Start()
     {
         StartCoroutine(LerpLerpLerpSahurPlus());
     }
 
-    // Update is called once per frame
     void Update()
     {
-
+        if (player_Damage.timeFrozen == true)
+        {
+            StopAllCoroutines();
+        }
+        else if (player_Damage.timeFrozen == false)
+        {
+            StartCoroutine(LerpLerpLerpSahurPlus());
+        }
     }
 
     IEnumerator LerpLerpLerpSahurPlus() 

@@ -3,7 +3,9 @@ using UnityEngine;
 public class CS_Time_Frozen : MonoBehaviour
 {
     [SerializeField] CS_Player_Deal_Damage playerDamageScript;
+    [SerializeField] Energy energy;
     [SerializeField] Animator animator;
+    [SerializeField] Animator rotateAnimator;
     [SerializeField] GameObject mainGameOb;
     [SerializeField] GameObject pannel;
     [SerializeField] private float currentAmountOfTimeFrozen;
@@ -16,11 +18,14 @@ public class CS_Time_Frozen : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T) && allowedTimeFreeze) 
+        bool oOE = energy.outOfEnergy;
+        if (Input.GetKeyDown(KeyCode.T) && allowedTimeFreeze && !oOE) 
         {
+            energy.EnergyConsumption(3);
             playerDamageScript.timeFrozen = true;
             animator.SetBool("Resume Time", false);
             allowedTimeFreeze = false;
+            rotateAnimator.StopPlayback();
         }
         if (playerDamageScript.timeFrozen) 
         {
@@ -40,6 +45,7 @@ public class CS_Time_Frozen : MonoBehaviour
         {
             playerDamageScript.timeFrozen = false;
             allowedTimeFreeze = true;
+            rotateAnimator.StartPlayback();
         }
         if (playerDamageScript.timeFrozen == false) 
         {

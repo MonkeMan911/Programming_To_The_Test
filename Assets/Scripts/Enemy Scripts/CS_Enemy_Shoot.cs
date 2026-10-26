@@ -4,27 +4,32 @@ using UnityEngine;
 public class CS_Enemy_Shoot : MonoBehaviour
 {
     [SerializeField] GameObject prefab;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] CS_Player_Deal_Damage player_Damage;
     void Start()
     {
-        
+        StartCoroutine(ShootCoroutine());
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+       
     }
     IEnumerator ShootCoroutine()
     {
-        float currentTime = 0;
-        float targetTime = 2;
-        while (currentTime < targetTime)
+        if (player_Damage.timeFrozen == false)
         {
-            currentTime += Time.deltaTime;
+            yield return null;
+            float currentTime = 0;
+            float targetTime = 2;
+            while (currentTime < targetTime)
+            {
+                currentTime += Time.deltaTime;
+                yield return null;
+            }
+            Instantiate(prefab);
+            StartCoroutine(ShootCoroutine());
             yield return null;
         }
-        Instantiate(prefab);
     }
         
 }
