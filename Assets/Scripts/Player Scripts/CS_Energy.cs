@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 
-public class Energy : MonoBehaviour 
+public class CS_Energy : MonoBehaviour 
 {
     [SerializeField] Slider energySlider; // Visual Slider represents energy levels on the screen for the player
     private int maxEnergy = 5; //maximum amount of energy

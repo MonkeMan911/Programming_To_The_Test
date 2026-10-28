@@ -17,6 +17,7 @@ public class CS_Teleport_Behind : MonoBehaviour
     RaycastHit hitInfo; //Tells Unity what the RayCast is Hitting
     [SerializeField] bool tpAble;
     [SerializeField] Transform player;
+    [SerializeField] CS_Energy energySystem;
 
     private void Start()
     {
@@ -33,9 +34,10 @@ public class CS_Teleport_Behind : MonoBehaviour
                 HighlightEnemy(); //Runs The Teleport Check Function if the RayCast Hits Enemy Layer and canTp == False
                 highlighted = true; //sets to true so it cannot be executed again
             }
-            if (tpAble && Input.GetKeyDown(KeyCode.E))
+            if (tpAble && Input.GetKeyDown(KeyCode.E) && energySystem.outOfEnergy == false)
             {
                 TeleportBehindEnemy();
+                energySystem.EnergyConsumption(1);
             }
         }
         else //if the raycast doesnt hit the desired layer

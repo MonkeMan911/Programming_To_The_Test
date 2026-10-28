@@ -3,7 +3,7 @@ using UnityEngine;
 public class CS_Time_Frozen : MonoBehaviour
 {
     [SerializeField] CS_Player_Deal_Damage playerDamageScript;
-    [SerializeField] Energy energy;
+    [SerializeField] CS_Energy energy;
     [SerializeField] Animator animator;
     [SerializeField] Animator rotateAnimator;
     [SerializeField] GameObject mainGameOb;
@@ -25,17 +25,18 @@ public class CS_Time_Frozen : MonoBehaviour
             playerDamageScript.timeFrozen = true;
             animator.SetBool("Resume Time", false);
             allowedTimeFreeze = false;
-            rotateAnimator.StopPlayback();
         }
         if (playerDamageScript.timeFrozen) 
         {
             mainGameOb.SetActive(true);
             pannel.SetActive(true);
+            rotateAnimator.speed = 0;
         }
         if (playerDamageScript != null && playerDamageScript.timeFrozen == false)
         { 
             animator.SetBool("Resume Time", true);
             pannel.SetActive(false);
+            rotateAnimator.speed = 1;
         }
         if (playerDamageScript.timeFrozen) 
         {
@@ -45,7 +46,6 @@ public class CS_Time_Frozen : MonoBehaviour
         {
             playerDamageScript.timeFrozen = false;
             allowedTimeFreeze = true;
-            rotateAnimator.StartPlayback();
         }
         if (playerDamageScript.timeFrozen == false) 
         {

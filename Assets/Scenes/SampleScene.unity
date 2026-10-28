@@ -483,7 +483,7 @@ MonoBehaviour:
   playerDamageScript: {fileID: 113237369}
   energy: {fileID: 113237370}
   animator: {fileID: 476402750}
-  rotateAnimator: {fileID: 2657692705407773867, guid: e493dc205f269674d903910f3edc2d65, type: 3}
+  rotateAnimator: {fileID: 1571526718}
   mainGameOb: {fileID: 504948752}
   pannel: {fileID: 2076329563}
   currentAmountOfTimeFrozen: 0
@@ -738,6 +738,7 @@ MonoBehaviour:
   highlighted: 0
   tpAble: 0
   player: {fileID: 113237368}
+  energySystem: {fileID: 113237370}
 --- !u!1 &476402749
 GameObject:
   m_ObjectHideFlags: 0
@@ -1527,6 +1528,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1336352294}
   m_CullTransparentMesh: 1
+--- !u!95 &1571526718 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2657692705407773867, guid: e493dc205f269674d903910f3edc2d65, type: 3}
+  m_PrefabInstance: {fileID: 204630668680350853}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1594487823
 GameObject:
   m_ObjectHideFlags: 0
@@ -1545,7 +1551,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1594487824
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1859,7 +1865,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 82b938cdfd35d924f94ec547d2d7a046, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1899,8 +1905,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.5, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
