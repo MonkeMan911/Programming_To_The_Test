@@ -1953,6 +1953,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2657692705407773867, guid: e493dc205f269674d903910f3edc2d65, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3399918980189794445, guid: e493dc205f269674d903910f3edc2d65, type: 3}
       propertyPath: player_Damage
       value: 
